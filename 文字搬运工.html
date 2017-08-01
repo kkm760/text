@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文字搬运工</title>
+<style type="text/css">
+	#box{
+		width:700px;
+		border: 5px solid #ccc;
+		margin: 0 auto;
+		font-size: 12px;
+	}
+	#box:after{
+		content: '';
+		display: block;
+		clear: both;
+	}
+	textarea,p{
+		width: 280px;
+		height: 200px;
+		border: 1px dotted black;
+		resize: none;
+		margin: 10px;
+		float: left;
+	}
+	#box div{
+		float: left;
+		width: 90px;
+	}
+	a,span{
+		text-decoration: none;
+		display: block;
+		line-height: 40px;
+		width:90px;
+		background-color: #F76300;
+		color: white;
+		margin-top: 10px;
+		text-align: center;
+	}
+	a:hover{
+		background-color: #C65218;
+	}
+	span{
+		background-color: white;
+		color:black;
+		font-weight: bold;
+	}
+	p{
+		float: right;
+		background-color: #63EFF7;
+	}
+	ul{
+		margin: 0;
+		padding: 0;
+		opacity: 0;
+	}
+	li{
+		width: 9px;
+		height: 9px;
+		list-style-type: none;
+		margin: 0 1px;
+		background-color:#FF6600;
+		float: left;
+	}
+	.active{
+		background-color: red;
+	}
+</style>
+</head>
+<body>
+	<div id="box">
+		<textarea>一个人，一段话，一段人生感悟人生，计较少一点，快乐多一点人生不易，且行且珍惜文字里取暖，音乐中释放不喜秦淮水，生憎江上船携一池荷花，盛开江南今夜，等你入梦花前月下有相思，真爱永恒活着，不是为了取悦别人笔墨流芬芳，醉爱文字情思念是一种眷恋，也是一种无奈一缕暗香远，诉不尽笙箫目中有人才有路，心中有爱才有度采禅意入墨，寄静美于心你的人品，决定你的运势感悟生活淡定是一味良药</textarea>
+		<div>
+			<a href="javascript:;">把文字右移</a>
+			<span>0/0</span>
+			<ul>
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		
+		<p></p>
+	</div>
+	<script type="text/javascript">
+		var box = document.getElementById('box');
+		var divs = box.getElementsByTagName('div')[0];
+		var as = divs.getElementsByTagName('a')[0];
+		var spans = divs.getElementsByTagName('span')[0];
+		var ps = box.getElementsByTagName('p')[0];
+		var texts = document.getElementsByTagName('textarea')[0];
+		var timer = null;
+		var num = 0;
+		var onOff = true;
+		as.onclick = function(){
+			if(onOff){
+				onOff = false;
+				var len = texts.value.length;
+				spans.innerHTML = '0/'+len;
+				ps.innerHTML = '';
+				clearInterval(timer);
+				timer = setInterval(function(){
+					ps.innerHTML = ps.innerHTML + texts.value.charAt(0);
+					spans.innerHTML = ps.innerHTML.length+'/'+len;
+				    texts.value = texts.value.substring(1);
+				    if(texts.value.length==0){
+					    clearInterval(timer);
+					    onOff = true;
+			     	}
+				},50)
+			}
+			
+		}
+	</script>
+</body>
+</html>
